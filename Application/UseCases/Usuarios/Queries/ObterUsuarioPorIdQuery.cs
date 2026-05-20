@@ -20,9 +20,7 @@ public class ObterUsuarioPorIdQueryHandler : IRequestHandler<ObterUsuarioPorIdQu
         var usuario = await usuarioRepository.GetByIdAsync(request.id);
 
         if (usuario is null)
-        {
             return Result.Fail("Usuário não encontrado.");
-        }
 
         var response = new UsuarioQueryResponse
         {

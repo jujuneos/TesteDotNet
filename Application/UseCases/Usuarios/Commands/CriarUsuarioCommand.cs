@@ -1,4 +1,6 @@
-﻿using FluentResults;
+﻿using Domain.Entidades;
+using Domain.Interfaces;
+using FluentResults;
 using FluentValidation;
 using MediatR;
 
@@ -26,7 +28,32 @@ public record CriarUsuarioCommand(
 
 public class CriarUsuarioCommandHandler : IRequestHandler<CriarUsuarioCommand, Result<CriarUsuarioCommandResponse>>
 {
-    private readonly 
+    private readonly IUsuarioRepository usuarioRepository;
+
+    public CriarUsuarioCommandHandler(IUsuarioRepository usuarioRepository)
+    {
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    public async Task<Result<CriarUsuarioCommandResponse>> Handle(CriarUsuarioCommand request, CancellationToken cancellationToken)
+    {
+        var usuarioExistente = await usuarioRepository.GetByEmailAsync(request.Email);
+
+        if (usuarioExistente is not null)
+            return Result.Fail(new Error("Já existe um usuário cadastrado com esse e-mail."));
+
+        var usuario = new Usuario
+        {
+            Nome = request.Nome,
+            Email = request.Email,
+            DataNascimento = request.DataNascimento,
+            DataCriacao = DateTime.UtcNow
+        };
+
+        await usuarioRepository.CreateAsync(usuario);
+
+        return Result.Ok(new CriarUsuarioCommandResponse(usuario.Id));
+    }
 }
 
 public record CriarUsuarioCommandResponse(int id);

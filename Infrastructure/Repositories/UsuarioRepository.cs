@@ -37,6 +37,11 @@ public class UsuarioRepository : IUsuarioRepository
         return await ctx.Usuario.FirstOrDefaultAsync(u => u.Id == id);
     }
 
+    public async Task<Usuario?> GetByEmailAsync(string email)
+    {
+        return await ctx.Usuario.FirstOrDefaultAsync(u => u.Email.Equals(email));
+    }
+
     public async Task CreateAsync(Usuario usuario)
     {
         await ctx.Usuario.AddAsync(usuario);
