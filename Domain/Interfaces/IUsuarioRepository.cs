@@ -8,6 +8,6 @@ public interface IUsuarioRepository
     public Task<Usuario?> GetByIdAsync(int id);
     public Task<Usuario?> GetByEmailAsync(string email);
     public Task CreateAsync(Usuario usuario);
-    public void Update(Usuario usuario);
-    public void DeleteUser(Usuario usuario);
+    public Task UpdateAsync(Usuario usuario);
+    public Task DeleteUserAsync(Usuario usuario);
 }

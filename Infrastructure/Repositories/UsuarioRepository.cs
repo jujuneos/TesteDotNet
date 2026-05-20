@@ -45,15 +45,18 @@ public class UsuarioRepository : IUsuarioRepository
     public async Task CreateAsync(Usuario usuario)
     {
         await ctx.Usuario.AddAsync(usuario);
+        await ctx.SaveChangesAsync();
     }
 
-    public void DeleteUser(Usuario usuario)
+    public async Task DeleteUserAsync(Usuario usuario)
     {
         ctx.Usuario.Remove(usuario);
+        await ctx.SaveChangesAsync();
     }
 
-    public void Update(Usuario usuario)
+    public async Task UpdateAsync(Usuario usuario)
     {
         ctx.Usuario.Update(usuario);
+        await ctx.SaveChangesAsync();
     }
 }
