@@ -6,7 +6,7 @@ using NSubstitute;
 
 namespace Application.Tests.UseCases.Usuarios.Commands;
 
-public class CriarUsuarioCommandTests
+public class CriarUsuarioCommandValidatorTests
 {
     private readonly CriarUsuarioCommand.Validator validator = new();
 
@@ -114,12 +114,12 @@ public class CriarUsuarioCommandTests
     }
 }
 
-public class CriarUsuarioCommandHandlerTests
+public class CriarUsuarioCommandTests
 {
     private readonly IUsuarioRepository usuarioRepository;
     private readonly CriarUsuarioCommandHandler handler;
 
-    public CriarUsuarioCommandHandlerTests()
+    public CriarUsuarioCommandTests()
     {
         usuarioRepository = Substitute.For<IUsuarioRepository>();
         handler = new CriarUsuarioCommandHandler(usuarioRepository);

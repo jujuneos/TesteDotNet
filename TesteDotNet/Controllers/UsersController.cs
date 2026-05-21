@@ -95,6 +95,6 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         var result = await sender.Send(new DeletarUsuarioCommand(id));
-        return Ok(result);
+        return Ok(result.Value);
     }
 };
