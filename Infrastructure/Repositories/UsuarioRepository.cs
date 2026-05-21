@@ -28,9 +28,7 @@ public class UsuarioRepository : IUsuarioRepository
             .AsNoTracking()
             .ToListAsync();
 
-        var totalRegistros = usuarios.Count;
-
-        return usuarios.Skip((pagina - 1) * totalRegistros).Take(totalRegistros).ToList();
+        return usuarios.Skip((pagina - 1) * 10).Take(10).ToList();
     }
 
     public async Task<Usuario?> GetByIdAsync(int id)

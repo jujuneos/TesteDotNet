@@ -1,5 +1,7 @@
+using Application.Behaviors;
 using Application.UseCases.Usuarios.Commands;
 using Domain.Interfaces;
+using FluentValidation;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
 using MediatR;
@@ -20,6 +22,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         b => b.MigrationsAssembly("Infrastructure")));
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddValidatorsFromAssemblyContaining<CriarUsuarioCommand.Validator>();
+
+builder.Services.AddTransient(
+    typeof(IPipelineBehavior<,>),
+    typeof(ValidationBehavior<,>));
 
 builder.Services.AddMediatR(cfg =>
 {
