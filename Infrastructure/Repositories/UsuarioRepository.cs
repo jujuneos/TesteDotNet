@@ -14,16 +14,17 @@ public class UsuarioRepository : IUsuarioRepository
         this.ctx = ctx;
     }
 
-    public async Task<List<Usuario>> GetAllAsync(int pagina)
+    public async Task<List<ObterUsuariosResponse>> GetAllAsync(int pagina)
     {
         var usuarios = await ctx
             .Usuario
-            .Select(u => new Usuario
-            {
-                Nome = u.Nome,
-                Email = u.Email,
-                DataNascimento = u.DataNascimento
-            })
+            .Select(u => new ObterUsuariosResponse
+            (
+                u.Id,
+                u.Nome,
+                u.Email,
+                u.DataNascimento.ToString("dd/MM/yyyy")
+            ))
             .AsNoTracking()
             .ToListAsync();
 

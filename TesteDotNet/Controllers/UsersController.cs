@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TesteDotNet.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class UsersController : ControllerBase
 {
@@ -29,7 +29,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> GetAll([FromQuery] int pagina = 1)
     {
         var usuarios = await sender.Send(new ObterTodosOsUsuariosQuery(pagina));
-        return Ok(usuarios);
+        return Ok(usuarios.Value);
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         var usuario = await sender.Send(new ObterUsuarioPorIdQuery(id));
-        return Ok(usuario);
+        return Ok(usuario.Value);
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class UsersController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(Usuario), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] CriarUsuarioRequest request)
+    public async Task<IActionResult> Create([FromBody] CriarEditarUsuarioRequest request)
     {
         var result = await sender.Send(new CriarUsuarioCommand(request.nome, request.email, request.dataNascimento));
         return Ok(result.Value);
@@ -77,9 +77,9 @@ public class UsersController : ControllerBase
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(Usuario), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] string nome, [FromBody] string email, [FromBody] DateTime dataNascimento)
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CriarEditarUsuarioRequest request)
     {
-        var result = await sender.Send(new EditarUsuarioCommand(id, nome, email, dataNascimento));
+        var result = await sender.Send(new EditarUsuarioCommand(id, request.nome, request.email, request.dataNascimento));
         return Ok(result);
     }
 

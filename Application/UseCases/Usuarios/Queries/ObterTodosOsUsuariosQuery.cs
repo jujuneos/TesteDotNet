@@ -5,9 +5,9 @@ using MediatR;
 
 namespace Application.UseCases.Usuarios.Queries;
 
-public record ObterTodosOsUsuariosQuery(int pagina) : IRequest<Result<IEnumerable<Usuario>>>;
+public record ObterTodosOsUsuariosQuery(int pagina) : IRequest<Result<IEnumerable<ObterUsuariosResponse>>>;
 
-public class ObterTodosOsUsuariosQueryHandler : IRequestHandler<ObterTodosOsUsuariosQuery, Result<IEnumerable<Usuario>>>
+public class ObterTodosOsUsuariosQueryHandler : IRequestHandler<ObterTodosOsUsuariosQuery, Result<IEnumerable<ObterUsuariosResponse>>>
 {
     private readonly IUsuarioRepository usuarioRepository;
 
@@ -16,7 +16,7 @@ public class ObterTodosOsUsuariosQueryHandler : IRequestHandler<ObterTodosOsUsua
         this.usuarioRepository = usuarioRepository;
     }
 
-    public async Task<Result<IEnumerable<Usuario>>> Handle(ObterTodosOsUsuariosQuery request, CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<ObterUsuariosResponse>>> Handle(ObterTodosOsUsuariosQuery request, CancellationToken cancellationToken)
     {
         var usuarios = await usuarioRepository.GetAllAsync(request.pagina);
 
