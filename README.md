@@ -2,7 +2,7 @@
 
 API desenvolvida em .NET Core para gerenciar uma tabela de usuários.
 Foi utilizado banco de dados SQL Server containerizado em docker.
-Para subir o banco basta abrir o terminal e executar ´docker compose up -d´.
+Para subir o banco basta abrir o terminal e executar `docker compose up -d`.
 
 ### Application
 
