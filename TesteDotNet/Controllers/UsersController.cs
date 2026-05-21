@@ -60,9 +60,9 @@ public class UsersController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(Usuario), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] string nome, [FromBody] string email, [FromBody] DateTime dataNascimento)
+    public async Task<IActionResult> Create([FromBody] CriarUsuarioRequest request)
     {
-        var result = await sender.Send(new CriarUsuarioCommand(nome, email, dataNascimento));
+        var result = await sender.Send(new CriarUsuarioCommand(request.nome, request.email, request.dataNascimento));
         return Ok(result.Value);
     }
 

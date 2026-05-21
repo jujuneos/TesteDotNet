@@ -57,3 +57,5 @@ public class CriarUsuarioCommandHandler : IRequestHandler<CriarUsuarioCommand, R
 }
 
 public record CriarUsuarioCommandResponse(int id);
+
+public record CriarUsuarioRequest(string nome, string email, DateTime dataNascimento);
