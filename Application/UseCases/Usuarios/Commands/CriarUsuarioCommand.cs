@@ -18,7 +18,7 @@ public record CriarUsuarioCommand(
         {
             RuleFor(x => x.Nome)
                 .NotEmpty().WithMessage("O nome é obrigatório.")
-                .MaximumLength(100).WithMessage("O nome deve ter no máximo 50 caracteres.");
+                .MaximumLength(50).WithMessage("O nome deve ter no máximo 50 caracteres.");
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("O email é obrigatório.")
                 .EmailAddress().WithMessage("O email deve ser válido.");
