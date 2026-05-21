@@ -26,8 +26,4 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Application\UseCases\Usuarios\Queries\" />
-  </ItemGroup>
-
 </Project>

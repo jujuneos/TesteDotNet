@@ -1,5 +1,4 @@
-﻿using Domain.Entidades;
-using Domain.Interfaces;
+﻿using Domain.Interfaces;
 using FluentResults;
 using MediatR;
 
