@@ -23,3 +23,7 @@ A camada de API contém o Controller e a classe Program.
 ### Tests
 
 Por fim, a camada de testes contém os testes unitários para todos os UseCases criados. Os testes utilizam as bibliotecas xUnit e NSubstitute.
+
+### Observação
+
+A branch principal está apenas com esse arquivo readme. O código está na branch master.
